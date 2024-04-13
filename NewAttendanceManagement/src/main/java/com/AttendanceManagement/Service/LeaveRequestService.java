@@ -63,4 +63,18 @@ public class LeaveRequestService {
 
     return leaveResponseDTO;
 }
+	//Approved,Rejected,Pending request List
+    
+    public List<LeaveRequest> getPendingLeaveRequests() {
+        return leaveRequestRepository.findByStatus("pending");
+    }
+    
+    public List<LeaveRequest> getApprovedLeaveRequests() {
+        return leaveRequestRepository.findByStatus("approved");
+    }
+    
+    public List<LeaveRequest> getRejectedLeaveRequests() {
+        return leaveRequestRepository.findByStatus("rejected");
+    }
+        
 }
