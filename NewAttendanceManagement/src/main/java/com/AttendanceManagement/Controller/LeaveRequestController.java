@@ -43,28 +43,25 @@ public class LeaveRequestController {
 	    public LeaveRequest createLeaveRequest(@RequestBody LeaveRequest leaveRequest) {
 	        return leaveRequestService.createLeaveRequest(leaveRequest);
 	    }
-	    
-//	    @GetMapping("/pending")
-//	    public List<LeaveRequest> getPendingLeaveRequests() {
-//	        return LeaveRequestRepository.findAll().stream()
-//	                .filter(leaveRequest -> leaveRequest.getStatus().equals("Pending"))
-//	                .collect(Collectors.toList());
-//	    }
-//
-//	    // Endpoint to get approved leave requests
-//	    @GetMapping("/approved")
-//	    public List<LeaveRequest> getApprovedLeaveRequests() {
-//	        return LeaveRequestRepository.findAll().stream()
-//	                .filter(leaveRequest -> leaveRequest.getStatus().equals("Approved"))
-//	                .collect(Collectors.toList());
-//	    }
-//
-//	    // Endpoint to get rejected leave requests
-//	    @GetMapping("/rejected")
-//	    public List<LeaveRequest> getRejectedLeaveRequests() {
-//	        return LeaveRequestRepository.findAll().stream()
-//	                .filter(leaveRequest -> leaveRequest.getStatus().equals("Rejected"))
-//	                .collect(Collectors.toList());
-//	    }
+	    // Approved, Rejected, Pending request List
+	
+	    @GetMapping("/pending")
+	    public ResponseEntity<List<LeaveRequest>> getPendingLeaveRequests() {
+	        List<LeaveRequest> pendingLeaveRequests = leaveRequestService.getPendingLeaveRequests();
+	        return new ResponseEntity<>(pendingLeaveRequests, HttpStatus.OK);
+	    }
+	
+	    @GetMapping("/approved")
+	    public ResponseEntity<List<LeaveRequest>> getApprovedLeaveRequests() {
+	        List<LeaveRequest> approvedLeaveRequests = leaveRequestService.getApprovedLeaveRequests();
+	        return new ResponseEntity<>(approvedLeaveRequests, HttpStatus.OK);
+	    }
+	
+	    @GetMapping("/rejected")
+	    public ResponseEntity<List<LeaveRequest>> getRejectedLeaveRequests() {
+	        List<LeaveRequest> rejectedLeaveRequests = leaveRequestService.getRejectedLeaveRequests();
+	        return new ResponseEntity<>(rejectedLeaveRequests, HttpStatus.OK);
+	    }
+}
 
 	}
